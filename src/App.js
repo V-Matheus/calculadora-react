@@ -43,14 +43,31 @@ const App = () => {
     }
   };
 
+  const handleDiviNumber = () => {
+    if (firstNumber === "0") {
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber("0");
+      setOperation("/");
+    } else {
+      const sum = Number(firstNumber) / Number(currentNumber);
+      setCurrentNumber(String(sum));
+      setOperation("");
+    }
+  };
+
   const handleEquals = () => {
     if (!firstNumber !== "0" && operation !== "" && currentNumber !== "0") {
       switch (operation) {
         case "+":
           handleSumNumber();
           break;
+
         case "-":
           handleMinusNumber();
+          break;
+
+        case "/":
+          handleDiviNumber();
           break;
 
         default:
@@ -66,7 +83,7 @@ const App = () => {
 
         <Row>
           <Button label="x" />
-          <Button label="/" />
+          <Button label="/" onClick={handleDiviNumber}/>
           <Button label="C" onClick={handleClear} />
           <Button label="." />
         </Row>
