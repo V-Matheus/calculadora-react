@@ -31,14 +31,30 @@ const App = () => {
     }
   };
 
+  const handleMinusNumber = () => {
+    if (firstNumber === "0") {
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber("0");
+      setOperation("-");
+    } else {
+      const sum = Number(firstNumber) - Number(currentNumber);
+      setCurrentNumber(String(sum));
+      setOperation("");
+    }
+  };
+
   const handleEquals = () => {
     if (!firstNumber !== "0" && operation !== "" && currentNumber !== "0") {
       switch (operation) {
         case "+":
           handleSumNumber();
           break;
-          default:
-             break;
+        case "-":
+          handleMinusNumber();
+          break;
+
+        default:
+          break;
       }
     }
   };
@@ -52,14 +68,14 @@ const App = () => {
           <Button label="x" />
           <Button label="/" />
           <Button label="C" onClick={handleClear} />
-          <Button label="X" />
+          <Button label="." />
         </Row>
 
         <Row>
           <Button label="7" onClick={() => handleAddNumber("7")} />
           <Button label="8" onClick={() => handleAddNumber("8")} />
           <Button label="9" onClick={() => handleAddNumber("9")} />
-          <Button label="-" onClick={() => handleAddNumber("-")} />
+          <Button label="-" onClick={handleMinusNumber} />
         </Row>
 
         <Row>
